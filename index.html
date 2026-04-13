@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Oyindamola Jongbo — AI Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --bg-card: #ede8de;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-faint: #8a8478;
+    --accent: #c2410c;
+    --accent-soft: #e8d5b7;
+    --line: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(194, 65, 12, 0.04) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(194, 65, 12, 0.03) 0%, transparent 40%);
+  }
+
+  /* Grain overlay for texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* HEADER */
+  header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .header-row span:last-child::before {
+    content: "●";
+    color: var(--accent);
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* HERO */
+  .hero {
+    padding: 120px 0 100px;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 19px;
+    max-width: 620px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .hero-meta a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink-faint);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .hero-meta a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* IMPACT STRIP */
+  .impact {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 0 -48px;
+    padding: 0 48px;
+  }
+
+  .impact-cell {
+    padding: 56px 32px 56px 0;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+
+  .impact-cell:last-child {
+    border-right: none;
+    padding-right: 0;
+    padding-left: 32px;
+  }
+
+  .impact-cell:nth-child(2) {
+    padding-left: 32px;
+  }
+
+  .impact-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(56px, 6vw, 84px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .impact-num .unit {
+    font-size: 0.5em;
+    color: var(--ink-faint);
+    margin-left: 4px;
+  }
+
+  .impact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* SECTION */
+  section {
+    padding: 120px 0 40px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  /* PROJECT */
+  .project {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid rgba(26, 26, 26, 0.15);
+    align-items: start;
+  }
+
+  .project:last-child {
+    border-bottom: 1px solid rgba(26, 26, 26, 0.15);
+  }
+
+  .project-index {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 0.9;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .project-index-sub {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  .project-body h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .project-tags {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .project-tags span + span::before {
+    content: " / ";
+    margin: 0 4px;
+    color: var(--ink-faint);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 56px;
+    margin-top: 24px;
+  }
+
+  .project-field {
+    padding-top: 20px;
+    border-top: 1px solid rgba(26, 26, 26, 0.15);
+  }
+
+  .project-field.full {
+    grid-column: 1 / -1;
+  }
+
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .field-body {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  .metric-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .metric-list li {
+    font-size: 15px;
+    color: var(--ink-soft);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .metric-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .metric-list li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* APPROACH */
+  .approach {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 80px 0 40px;
+  }
+
+  .approach-item {
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+
+  .approach-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .approach-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .approach-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 120px 0 60px;
+    border-top: 1px solid var(--line);
+    margin-top: 80px;
+  }
+
+  .footer-quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 800px;
+    margin-bottom: 64px;
+  }
+
+  .footer-quote em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(26, 26, 26, 0.15);
+  }
+
+  .footer-col-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 15px;
+    padding: 6px 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .impact { grid-template-columns: 1fr; margin: 0 -24px; padding: 0 24px; }
+    .impact-cell { border-right: none; border-bottom: 1px solid var(--line); padding: 40px 0 !important; }
+    .impact-cell:last-child { border-bottom: none; padding-left: 0 !important; }
+    .project { grid-template-columns: 1fr; gap: 24px; }
+    .project-grid { grid-template-columns: 1fr; gap: 32px; }
+    .approach { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 60px; }
+    section { padding: 72px 0 20px; }
+  }
+
+  @media (max-width: 560px) {
+    .approach { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-row">
+      <span>Oyindamola Jongbo</span>
+      <span>Available for AI PM roles</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Selected Work, 2021 — Present</div>
+    <h1>Shipping AI products<br>that move <em>real</em> numbers.</h1>
+    <p class="hero-sub">
+      I'm a technical program manager pivoting into AI Product Management. Over the last four years at Wallenius Wilhelmsen I've led the delivery of three enterprise applications — one of them AI-powered — that collectively saved over $1M annually and lifted productivity by 30%. I also teach a four-week AI Product Management course to the next cohort of PMs.
+    </p>
+    <div class="hero-meta">
+      <span>Parsippany, NJ</span>
+      <a href="mailto:oyindajongbo@gmail.com">oyindajongbo@gmail.com</a>
+      <a href="tel:9737049380">973 · 704 · 9380</a>
+      <a href="#">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <div class="impact">
+    <div class="impact-cell">
+      <div class="impact-num">$1M<span class="unit">/yr</span></div>
+      <div class="impact-label">Saved via AI Inspection</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">30<span class="unit">%</span></div>
+      <div class="impact-label">Productivity Lift</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">35<span class="unit">%</span></div>
+      <div class="impact-label">Faster Payments</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section>
+    <div class="section-head">
+      <span class="section-num">01 — Work</span>
+      <h2 class="section-title">Three products, one thesis: measurable impact over polish.</h2>
+    </div>
+
+    <!-- PROJECT 1 -->
+    <article class="project">
+      <div class="project-index">
+        01
+        <span class="project-index-sub">AI / Computer Vision</span>
+      </div>
+      <div class="project-body">
+        <h3>Vehicle Quality Inspection</h3>
+        <div class="project-tags">
+          <span>Computer Vision</span>
+          <span>Operations</span>
+          <span>Damage Detection</span>
+          <span>Risk Reduction</span>
+        </div>
+
+        <div class="project-grid">
+          <div class="project-field full">
+            <div class="field-label">The Problem</div>
+            <div class="field-body">
+              Processed vehicles were passing through inspection with damage going undetected, resulting in downstream incident claims and penalty costs. Manual inspection was slow, inconsistent across operators, and created a bottleneck during peak volume.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">Users</div>
+            <div class="field-body">
+              Quality inspectors, operations managers, and claims teams at vehicle processing centers.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">My Role</div>
+            <div class="field-body">
+              Led requirements discovery, authored the PRD, defined model evaluation criteria, and aligned stakeholders across operations, data science, and claims.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Approach</div>
+            <div class="field-body">
+              Ran customer discovery sessions to map the current inspection workflow, quantify miss rates, and identify the highest-cost damage categories. Partnered with data science on training data strategy and defined success metrics weighted toward precision (false positives erode inspector trust). Built a human-in-the-loop review step so inspectors could validate and correct model outputs, creating a feedback loop that improved model accuracy over time.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Outcomes</div>
+            <ul class="metric-list">
+              <li><strong>$1M in annual savings</strong> from reduced incident penalties</li>
+              <li>Standardized inspection quality across processing centers</li>
+              <li>Created a structured feedback loop for continuous model improvement</li>
+              <li>Freed inspector capacity to focus on edge-case judgment calls</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2 -->
+    <article class="project">
+      <div class="project-index">
+        02
+        <span class="project-index-sub">Workflow / Data</span>
+      </div>
+      <div class="project-body">
+        <h3>Customer Scheduling Application</h3>
+        <div class="project-tags">
+          <span>Operations</span>
+          <span>Data Capture</span>
+          <span>Productivity</span>
+        </div>
+
+        <div class="project-grid">
+          <div class="project-field full">
+            <div class="field-label">The Problem</div>
+            <div class="field-body">
+              Equipment processing centers were collecting scheduling and throughput data inconsistently across sites, making it impossible to forecast capacity or identify bottlenecks. Customer teams were double-booking slots and losing visibility into daily operations.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">Users</div>
+            <div class="field-body">
+              Customer service teams, site operators, and planning leads across multiple processing centers.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">My Role</div>
+            <div class="field-body">
+              Owned end-to-end delivery as Scrum Master and program manager. Led discovery, wrote the PRD, facilitated sprints, and managed rollout.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Approach</div>
+            <div class="field-body">
+              Interviewed operators at multiple sites to map real scheduling workflows vs. documented ones. Prioritized a minimal first release around the highest-friction touchpoint (slot booking) and layered in data capture incrementally to avoid overwhelming adoption. Partnered with change management to train users and track adoption metrics post-launch.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Outcomes</div>
+            <ul class="metric-list">
+              <li><strong>30% productivity increase</strong> at processing centers</li>
+              <li>Unified data collection enabling capacity forecasting for the first time</li>
+              <li>Reduced double-bookings and scheduling conflicts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3 -->
+    <article class="project">
+      <div class="project-index">
+        03
+        <span class="project-index-sub">Automation / Finance</span>
+      </div>
+      <div class="project-body">
+        <h3>Freight Audit & Invoice Processing</h3>
+        <div class="project-tags">
+          <span>Finance Automation</span>
+          <span>Contract Validation</span>
+          <span>Cash Flow</span>
+        </div>
+
+        <div class="project-grid">
+          <div class="project-field full">
+            <div class="field-label">The Problem</div>
+            <div class="field-body">
+              Freight invoices were being generated manually and validated against contracts by hand, causing delayed billing cycles, disputed charges, and working-capital drag. Finance teams spent hours per week reconciling discrepancies.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">Users</div>
+            <div class="field-body">
+              Finance and billing operations teams, contract managers, and accounts payable.
+            </div>
+          </div>
+
+          <div class="project-field">
+            <div class="field-label">My Role</div>
+            <div class="field-body">
+              Program manager and business analyst. Gathered requirements, wrote the PRD, coordinated vendors, and owned change management.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Approach</div>
+            <div class="field-body">
+              Mapped the existing invoice-to-payment flow to identify where manual work was introducing delay and error. Prioritized rules-based contract validation first, with exception routing for edge cases. Defined acceptance criteria around cycle time and dispute rate, and instrumented the rollout with dashboards for finance leadership.
+            </div>
+          </div>
+
+          <div class="project-field full">
+            <div class="field-label">Outcomes</div>
+            <ul class="metric-list">
+              <li><strong>35% faster payment processing</strong></li>
+              <li>Reduced invoice disputes and reconciliation time</li>
+              <li>Improved working capital position and vendor relationships</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- APPROACH -->
+  <section>
+    <div class="section-head">
+      <span class="section-num">02 — Approach</span>
+      <h2 class="section-title">How I think about AI products.</h2>
+    </div>
+
+    <div class="approach">
+      <div class="approach-item">
+        <div class="approach-num">01</div>
+        <div class="approach-title">Start with the cost of being wrong</div>
+        <div class="approach-body">Before picking a model, I ask what a false positive and a false negative actually cost the business. That decides the metric.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">02</div>
+        <div class="approach-title">Design for the handoff</div>
+        <div class="approach-body">AI rarely replaces humans cleanly. I design human-in-the-loop checkpoints that build trust and generate training data simultaneously.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">03</div>
+        <div class="approach-title">Instrument before you launch</div>
+        <div class="approach-body">Drift, bias, and edge cases only surface in production. Dashboards and evaluation pipelines ship on day one, not month six.</div>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">04</div>
+        <div class="approach-title">Adoption is the real metric</div>
+        <div class="approach-body">A model with 95% accuracy that nobody uses is worth zero. Change management and workflow fit get equal weight in my PRDs.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-quote">
+      "I care about AI products that earn the trust of the people who use them — not just the ones that demo well."
+    </p>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-col-label">Currently</div>
+        <a href="#">Business Service Specialist II, Wallenius Wilhelmsen</a>
+        <a href="#">Lecturer, AI Product Management</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Certified</div>
+        <a href="#">PMP · SAFe SSM · PSM</a>
+        <a href="#">Product School PMC & AIPC</a>
+        <a href="#">DeepLearning.AI · Google AI</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Let's talk</div>
+        <a href="mailto:oyindajongbo@gmail.com">oyindajongbo@gmail.com</a>
+        <a href="tel:9737049380">973 · 704 · 9380</a>
+        <a href="#">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Oyindamola Jongbo</span>
+      <span>Built with intention</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
